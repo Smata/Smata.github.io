@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Mapa Web</title>
+<link rel="stylesheet"
+href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+<!--[if lte IE 8]>
+<link rel="stylesheet"
+href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+<![endif]-->
+<script
+src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<style type="text/css">
+#map { width: 600px; height: 400px }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+function onEachFeature(feature, layer) {
+layer.bindPopup("ID: "+feature.properties.Name);
+};
+
+function onEachFeature2(feature, layer) {
+layer.bindPopup("ID: "+feature.properties.nombre);
+};
+
+var xhr1 = new XMLHttpRequest();
+xhr1.open('GET','Archivos GeoJSON/Avenidas/avenidas.geojson',false);
+xhr1.send(null);
+var avenidas = JSON.parse(xhr1.responseText);
+
+var xhr2 = new XMLHttpRequest();
+xhr2.open('GET','Archivos GeoJSON/Calles/calles.geojson',false);
+xhr2.send(null);
+var calles = JSON.parse(xhr2.responseText);
+
+var xhr3 = new XMLHttpRequest();
+xhr3.open('GET','Archivos GeoJSON/Quebrada/quebrada.geojson',false);
+xhr3.send(null);
+var quebrada = JSON.parse(xhr3.responseText);
+
+var xhr4 = new XMLHttpRequest();
+xhr4.open('GET','Archivos GeoJSON/Edificios/edificios.geojson',false);
+xhr4.send(null);
+var edificios = JSON.parse(xhr4.responseText);
+
+
+var style1 = {
+"color": "#CC0099",
+"weight": 5,
+"opacity": 0.65
+};
+
+var style2 = {
+"color": "#66CC00",
+"weight": 5,
+"opacity": 0.65
+};
+
+var style3 = {
+"color": "#00CCCC",
+"weight": 5,
+"opacity": 0.65
+};
+
+var style4 = {
+"color": "#FF3366",
+"weight": 5,
+"opacity": 0.65
+};
+
+var map = L.map('map').setView([9.927942,-84.077979],8);
+L.geoJson(avenidas, {
+style: style1, onEachFeature: onEachFeature
+}).addTo(map);
+
+L.geoJson(calles, {
+style: style2, onEachFeature: onEachFeature
+}).addTo(map);
+
+L.geoJson(quebrada, {
+style: style3, onEachFeature: onEachFeature2
+}).addTo(map);
+
+L.geoJson(edificios, {
+style: style4, onEachFeature: onEachFeature2
+}).addTo(map);
+
+
+</script>
+</body>
+</html>
