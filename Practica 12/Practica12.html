@@ -1,0 +1,151 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Mapa Web</title>
+<link rel="stylesheet"
+href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/
+3.0.2/css/font-awesome.css">
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/
+leaflet-0.5/leaflet.ie.css" />
+<![endif]-->
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<script
+src="https://raw.github.com/lvoogdt/Leaflet.awesome-markers/
+master/dist/leaflet.awesome-markers.js"></script>
+<style type="text/css">
+#map { width: 600px; height: 400px }
+.awesome-marker {
+background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/
+master/dist/images/markers-soft.png") no-repeat 0 0;
+width: 35px; height: 46px;
+position:absolute;
+left:0; top:0;
+display: block;
+text-align: center;
+}
+.awesome-marker-shadow {
+background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/
+master/dist/images/markers-shadow.png") no-repeat 0 0;
+width: 36px; height: 16px;
+}
+.awesome-marker i {
+color: #333; margin-top: 10px;
+display: inline-block; font-size: 14px;
+}
+.awesome-marker .icon-white { color: #fff; }
+.awesome-marker-icon-red { background-position: 0 0; }
+.awesome-marker-icon-darkred { background-position: -180px 0; }
+.awesome-marker-icon-orange { background-position: -36px 0; }
+.awesome-marker-icon-green { background-position: -72px 0; }
+.awesome-marker-icon-darkgreen { background-position: -252px 0; }
+.awesome-marker-icon-blue { background-position: -108px 0; }
+.awesome-marker-icon-darkblue { background-position: -216px 0; }
+.awesome-marker-icon-purple { background-position: -144px 0; }
+.awesome-marker-icon-darkpurple { background-position: -288px 0; }
+.awesome-marker-icon-cadetblue { background-position: -324px 0; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+var redMarker = L.AwesomeMarkers.icon({
+icon: "food",
+color: "green",
+iconColor: "black"
+});
+function onEachFeature(feature, layer) {
+layer.bindPopup(feature.properties.nombre);
+};
+
+function onEachFeature2(feature, layer) {
+layer.bindPopup(feature.properties.Name);
+};
+
+
+function pointToLayer(feature, latlng) {
+return L.marker(latlng, {icon: redMarker});
+};
+var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")
+|| new ActiveXObject("Microsoft.XMLHTTP");
+
+xhr.open("GET","Archivos GeoJSON/Restaurantes.geojson",false); xhr.send(null);
+var restaurantes = JSON.parse(xhr.responseText);
+
+xhr.open("GET","Archivos GeoJSON/Calles.geojson",false); xhr.send(null);
+var calles = JSON.parse(xhr.responseText);
+
+xhr.open("GET","Archivos GeoJSON/Avenidas.geojson",false); xhr.send(null);
+var avenidas = JSON.parse(xhr.responseText);
+
+xhr.open("GET","Archivos GeoJSON/Edificios.geojson",false); xhr.send(null);
+var edificios = JSON.parse(xhr.responseText);
+
+xhr.open("GET","Archivos GeoJSON/Quebrada.geojson",false); xhr.send(null);
+var quebrada = JSON.parse(xhr.responseText);
+
+var styleCalles = {
+"color": "#990066",
+"weight": 3,
+"opacity": 0.65
+};
+var styleAvenidas = {
+"color": "#FFCC00",
+"weight": 3,
+"opacity": 0.65
+};
+
+var styleEdificios = {
+"color": "#66CC00",
+"weight": 3,
+"opacity": 0.65
+};
+
+var styleRestaurantes = {
+"color": "#999999",
+"weight": 1,
+"opacity": 0.65
+};
+
+var styleQuebrada = {
+"color": "#006699",
+"weight": 4,
+"opacity": 0.65
+};
+
+var restaurantesLayer = L.geoJson(restaurantes, {
+pointToLayer: pointToLayer, onEachFeature: onEachFeature
+});
+var callesLayer = L.geoJson(calles, {
+style: styleCalles, onEachFeature: onEachFeature2
+});
+var avenidasLayer = L.geoJson(avenidas, {
+style: styleAvenidas, onEachFeature: onEachFeature2
+});
+
+var edificiosLayer = L.geoJson(edificios, {
+style: styleEdificios, onEachFeature: onEachFeature
+});
+
+var quebradaLayer = L.geoJson(quebrada, {
+style: styleQuebrada, onEachFeature: onEachFeature
+});
+
+var map = L.map("map", {
+center: new L.LatLng(9.93,-84.08),
+zoom: 8,
+layers: [restaurantesLayer, callesLayer, avenidasLayer, edificiosLayer, quebradaLayer]
+});
+var overlayMaps = {
+"Restaurantes": restaurantesLayer,
+"Calles": callesLayer,
+"Avenidas": avenidasLayer,
+"Edificios": edificiosLayer,
+"Quebrada": quebradaLayer
+};
+L.control.layers(null, overlayMaps).addTo(map);
+</script>
+</body>
+</html>
+
