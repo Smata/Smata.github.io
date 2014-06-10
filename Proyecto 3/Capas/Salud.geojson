@@ -1,0 +1,31 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "nombre": "Farmacia Fishel", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.007953567884158, 9.977545816515638 ] } },
+{ "type": "Feature", "properties": { "nombre": "Optica Barrantes", "servicios": "optica" }, "geometry": { "type": "Point", "coordinates": [ -84.00989542695153, 9.976479697811984 ] } },
+{ "type": "Feature", "properties": { "nombre": "Opticas Vision", "servicios": "optica" }, "geometry": { "type": "Point", "coordinates": [ -84.007363395030353, 9.977212654420747 ] } },
+{ "type": "Feature", "properties": { "nombre": "farmacia", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.007306281528372, 9.977850421859543 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.0072206112754, 9.976565368064957 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia Sucre", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.007030232935463, 9.978259735290413 ] } },
+{ "type": "Feature", "properties": { "nombre": "Clinica Maria Auxiliadora", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.006430541164647, 9.978269254207408 ] } },
+{ "type": "Feature", "properties": { "nombre": "Dentista", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.000176612697729, 9.981229637393449 ] } },
+{ "type": "Feature", "properties": { "nombre": "Dentista", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.009371886516732, 9.982438539852058 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.013484058659415, 9.984542220508381 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.012893885805596, 9.982781220863947 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.009933502619546, 9.976079903298112 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.007049270769471, 9.977840902942544 ] } },
+{ "type": "Feature", "properties": { "nombre": "Clinica Privada", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.010428486303383, 9.976089422215106 ] } },
+{ "type": "Feature", "properties": { "nombre": "Clinica Odontologica", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.010276183631447, 9.975556362863276 ] } },
+{ "type": "Feature", "properties": { "nombre": "Clinica Dental", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.01514986913385, 9.970635082775868 ] } },
+{ "type": "Feature", "properties": { "nombre": "Clinica Privada", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.015721004153676, 9.969778380246142 ] } },
+{ "type": "Feature", "properties": { "nombre": "Clinica de Coronado", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.016396847260467, 9.970149618009023 ] } },
+{ "type": "Feature", "properties": { "nombre": "Farmacia el Pilar", "servicios": "farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.008258173228057, 9.975632514199257 ] } },
+{ "type": "Feature", "properties": { "nombre": "Macrobiotica", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.007565672016582, 9.976893770701347 ] } },
+{ "type": "Feature", "properties": { "nombre": "Macrobiotica", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.006661374901867, 9.977779029982068 ] } },
+{ "type": "Feature", "properties": { "nombre": "Cruz Roja", "servicios": "cruz Roja" }, "geometry": { "type": "Point", "coordinates": [ -84.009992995850808, 9.977502981389154 ] } },
+{ "type": "Feature", "properties": { "nombre": "Dentista", "servicios": "clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.000338434286689, 9.975451654776306 ] } },
+{ "type": "Feature", "properties": { "nombre": "Opticas Vision", "servicios": "optica" }, "geometry": { "type": "Point", "coordinates": [ -84.02540650219818, 9.973766806467841 ] } }
+]
+}
