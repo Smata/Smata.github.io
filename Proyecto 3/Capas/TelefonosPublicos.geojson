@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "cat": 6, "nombre": "Telefono Publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.007284447804807, 9.977064063801892 ] } },
+{ "type": "Feature", "properties": { "cat": 7, "nombre": "Telefono Publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.007278615830828, 9.977145711437593 ] } },
+{ "type": "Feature", "properties": { "cat": 8, "nombre": "Telefono Publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.007272783856848, 9.97725068696921 ] } },
+{ "type": "Feature", "properties": { "cat": 40, "nombre": "Telefono publico", "servicios": "publico" }, "geometry": { "type": "Point", "coordinates": [ -84.000889470476011, 9.986513145583732 ] } },
+{ "type": "Feature", "properties": { "cat": 41, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -83.990498949371798, 9.989597267448598 ] } },
+{ "type": "Feature", "properties": { "cat": 42, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -83.967030342939211, 9.976554316492813 ] } },
+{ "type": "Feature", "properties": { "cat": 43, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -83.960998616761174, 9.986929714411279 ] } },
+{ "type": "Feature", "properties": { "cat": 44, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.006209402437236, 9.980039956949073 ] } },
+{ "type": "Feature", "properties": { "cat": 45, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.007764971204423, 9.976479700711828 ] } },
+{ "type": "Feature", "properties": { "cat": 46, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.00826430690158, 9.976308341035074 ] } },
+{ "type": "Feature", "properties": { "cat": 47, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -83.992400591398336, 9.979563962488006 ] } },
+{ "type": "Feature", "properties": { "cat": 48, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -83.990114859051957, 9.988512055121824 ] } },
+{ "type": "Feature", "properties": { "cat": 49, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.024166170402765, 9.973775430184436 ] } },
+{ "type": "Feature", "properties": { "cat": 50, "nombre": "Telefono publico", "servicios": "telefono" }, "geometry": { "type": "Point", "coordinates": [ -84.013392145148003, 9.976384329128669 ] } }
+]
+}

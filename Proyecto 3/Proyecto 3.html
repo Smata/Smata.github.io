@@ -64,7 +64,7 @@ display: inline-block; font-size: 14px;
 var restaurantesMarker = L.AwesomeMarkers.icon({icon: 'cutlery', prefix: 'fa', markerColor: 'red'});
 var escuelasMarker = L.AwesomeMarkers.icon({icon: 'mortar-board', prefix: 'fa', markerColor: 'purple'});
 var bancosMarker = L.AwesomeMarkers.icon({icon: 'bank', prefix: 'fa', markerColor: 'darkblue'});
-var telefonosMarker = L.AwesomeMarkers.icon({icon: 'phone', prefix: 'fa', markerColor: 'black'});
+var telefonosMarker = L.AwesomeMarkers.icon({icon: 'phone', prefix: 'fa', markerColor: 'darkred'});
 var hospitalMarker = L.AwesomeMarkers.icon({icon: 'hospital-o', prefix: 'fa', markerColor: 'gray'});
 var farmaciasMarker = L.AwesomeMarkers.icon({icon: 'medkit', prefix: 'fa', markerColor: 'blue'});
 var ambulanciasMarker = L.AwesomeMarkers.icon({icon: 'ambulance', prefix: 'fa', markerColor: 'blue'});
@@ -73,7 +73,7 @@ var puentesMarker = L.AwesomeMarkers.icon({icon: 'xing', prefix: 'fa', markerCol
 var comerciosMarker = L.AwesomeMarkers.icon({icon: 'building-o', prefix: 'fa', markerColor: 'orange'});
 
 function onEachFeature1(feature, layer) {
-layer.bindPopup("<b>Distrito: </b>"+feature.properties.NDISTRITO);
+layer.bindPopup("<b>Distrito: </b>"+feature.properties.NDISTRITO+"<br> </br>"+"<b>Población de Hombres: </b>"+feature.properties.POB_2000_H+"<br> </br>"+"<b>Población de Mujeres: </b>"+feature.properties.POB_2000_M+"<br> </br>"+"<b>Hectáreas: </b>"+feature.properties.HECTARES);
 };
 		
 function onEachFeature2(feature, layer) {
@@ -85,7 +85,7 @@ layer.bindPopup(feature.properties.TIPO);
 };
 
 function onEachFeature4(feature, layer) {
-layer.bindPopup(feature.properties.NOMBRE);
+layer.bindPopup("<b>Nombre: </b>"+feature.properties.NOMBRE+"<br> </br>"+"<b>ID: </b>"+feature.properties.cat);
 };
 
 function onEachFeature5(feature, layer) {
@@ -93,7 +93,7 @@ layer.bindPopup("<b>Nombre: </b>"+feature.properties.nombre +"<br> </br>"+"<b>Di
 };
 
 function onEachFeature6(feature, layer) {
-layer.bindPopup("<b>Nombre: </b>"+feature.properties.nombre +"<br> </br>"+"<b>Plaza más cercana: </b>"+feature.properties.id_plaza);
+layer.bindPopup("<b>Nombre: </b>"+feature.properties.nombre +"<br> </br>"+"<b>Edificio: </b>"+feature.properties.edificio +"<br> </br>"+"<b>Plaza más cercana: </b>"+feature.properties.id_plaza);
 };
 
 function onEachFeature7(feature, layer) {
@@ -114,6 +114,14 @@ layer.bindPopup(feature.properties.nombre);
 
 function onEachFeature11(feature, layer) {
 layer.bindPopup("<b>Nombre: </b>"+feature.properties.nombre +"<br> </br>"+"<b>Restaurante mas cercano: </b>"+feature.properties.id_res);
+};
+
+function onEachFeature12(feature, layer) {
+layer.bindPopup("<b>ID Teléfono: </b>"+feature.properties.cat);
+};
+
+function onEachFeature13(feature, layer) {
+layer.bindPopup("<b>ID : </b>"+feature.properties.cat+"<br> </br>"+"<b>Nombre: </b>"+feature.properties.nombre +"<br> </br>"+"<b> Edificio: </b>"+feature.properties.edificio);
 };
 
 function pointToLayerRestaurantes(feature, latlng) {
@@ -143,6 +151,11 @@ return L.marker(latlng, {icon: comerciosMarker});
 function pointToLayerBancosXRestaurantes(feature, latlng) {
 return L.marker(latlng, {icon: bancosMarker});
 };
+
+function pointToLayerTelefonosPublicos(feature, latlng) {
+return L.marker(latlng, {icon: telefonosMarker});
+};
+
 
 var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")
 || new ActiveXObject("Microsoft.XMLHTTP");
@@ -199,6 +212,15 @@ xhr.open('GET','Capas/BancosXRestaurantes.geojson',false);
 xhr.send(null);
 var bancosXRestaurantes = JSON.parse(xhr.responseText);
 
+xhr.open('GET','Capas/TelefonosPublicos.geojson',false);
+xhr.send(null);
+var telefonosPublicos = JSON.parse(xhr.responseText);
+
+xhr.open('GET','Capas/ParquesYPlazas.geojson',false);
+xhr.send(null);
+var parquesYPlazas = JSON.parse(xhr.responseText);
+
+
 var styleDistritosCoronado = {
 "color": "#009933",
 "weight": 4,
@@ -232,6 +254,12 @@ var styleEscuelasYColegiosXDistrito = {
 var stylePoblacionesThiessenXDistritos = {
 "color": "#FF3399",
 "weight": 3,
+"opacity": 0.65
+};
+
+var styleParquesYPlazas = {
+"color": "#009999",
+"weight": 4,
 "opacity": 0.65
 };
 		
@@ -288,11 +316,20 @@ var bancosXRestaurantesLayer = L.geoJson(bancosXRestaurantes, {
 pointToLayer: pointToLayerBancosXRestaurantes, onEachFeature: onEachFeature11
 });
 
+var telefonosPublicosLayer = L.geoJson(telefonosPublicos, {
+pointToLayer: pointToLayerTelefonosPublicos, onEachFeature: onEachFeature12
+});
+
+var parquesYPlazasLayer = L.geoJson(parquesYPlazas, {
+style: styleParquesYPlazas, onEachFeature: onEachFeature13
+});
+
 var map = L.map("map", {
 center: new L.LatLng(10.06,-83.95),
 zoom: 11,
-layers: [distritosCoronadoLayer, riosBufferLayer, callesBufferLayer, restaurantesLayer, saludLayer, iglesiasXDistritoLayer, escuelasYColegiosXDistritoLayer, 
-         escuelasXPlazaLayer, paradasXTelefonosLayer, puentesXDistritoLayer, poblacionesThiessenXDistritosLayer, comerciosXLocalidadLayer, bancosXRestaurantesLayer]
+layers: [distritosCoronadoLayer, riosBufferLayer, callesBufferLayer, saludLayer, restaurantesLayer, bancosXRestaurantesLayer, iglesiasXDistritoLayer,
+         escuelasYColegiosXDistritoLayer, escuelasXPlazaLayer, telefonosPublicosLayer, paradasXTelefonosLayer, puentesXDistritoLayer, 
+		 poblacionesThiessenXDistritosLayer, comerciosXLocalidadLayer]
 });
 
 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -308,16 +345,17 @@ var overlayMaps = {
 "Distritos Coronado": distritosCoronadoLayer,
 "Ríos": riosBufferLayer,
 "Calles": callesBufferLayer,
-"Restaurantes": restaurantesLayer,
 "Salud": saludLayer,
+"Restaurantes": restaurantesLayer,
+"Bancos X Restaurantes": bancosXRestaurantesLayer,
 "Iglesias X Distrito": iglesiasXDistritoLayer,
 "Escuelas y Colegios X Distrito": escuelasYColegiosXDistritoLayer,
 "Escuelas X Plaza": escuelasXPlazaLayer,
+"Telefonos Publicos": telefonosPublicosLayer,
 "Paradas X Telefonos": paradasXTelefonosLayer,
 "Puentes X Distrito": puentesXDistritoLayer,
 "Poblaciones Thiessen X Distritos": poblacionesThiessenXDistritosLayer,
-"Comercios X Localidad": comerciosXLocalidadLayer,
-"Bancos X Restaurantes": bancosXRestaurantesLayer
+"Comercios X Localidad": comerciosXLocalidadLayer
 };
 
 L.control.layers(null, overlayMaps).addTo(map);
