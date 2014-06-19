@@ -19,7 +19,7 @@ leaflet-0.5/leaflet.ie.css" />
 -->
 
 <style type="text/css">
-#map { width: 600px; height: 400px }
+#map { width: 800px; height: 600px }
 .awesome-marker {
 background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/
 master/dist/images/markers-soft.png") no-repeat 0 0;
@@ -77,11 +77,11 @@ layer.bindPopup("<b>Distrito: </b>"+feature.properties.NDISTRITO+"<br> </br>"+"<
 };
 		
 function onEachFeature2(feature, layer) {
-layer.bindPopup(feature.properties.tipo);
+layer.bindPopup("<b>Tipo: </b>"+feature.properties.tipo);
 };
 
 function onEachFeature3(feature, layer) {
-layer.bindPopup(feature.properties.TIPO);
+layer.bindPopup("<b>Tipo: </b>"+feature.properties.TIPO);
 };
 
 function onEachFeature4(feature, layer) {
@@ -163,10 +163,18 @@ var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")
 xhr.open('GET','Capas/DistritosCoronado.geojson',false);
 xhr.send(null);
 var distritosCoronado = JSON.parse(xhr.responseText);
-		
+
+xhr.open('GET','Capas/Rios.geojson',false);
+xhr.send(null);
+var rios = JSON.parse(xhr.responseText);
+	
 xhr.open('GET','Capas/RiosBuffer.geojson',false);
 xhr.send(null);
 var riosBuffer = JSON.parse(xhr.responseText);
+
+xhr.open('GET','Capas/Calles.geojson',false);
+xhr.send(null);
+var calles = JSON.parse(xhr.responseText);
 
 xhr.open('GET','Capas/CallesBuffer.geojson',false);
 xhr.send(null);
@@ -223,12 +231,24 @@ var parquesYPlazas = JSON.parse(xhr.responseText);
 
 var styleDistritosCoronado = {
 "color": "#009933",
-"weight": 4,
+"weight": 5,
 "opacity": 0.65
 };
 	
 var styleCallesBuffer = {
 "color": "#CC6600",
+"weight": 1,
+"opacity": 0.65
+};
+
+var styleCalles = {
+"color": "#660033",
+"weight": 1,
+"opacity": 0.65
+};
+
+var styleRios = {
+"color": "#0033FF",
 "weight": 1,
 "opacity": 0.65
 };
@@ -267,13 +287,21 @@ var styleParquesYPlazas = {
 var distritosCoronadoLayer = L.geoJson(distritosCoronado, {
 style: styleDistritosCoronado, onEachFeature: onEachFeature1
 });
-		
+
+var riosLayer = L.geoJson(rios, {
+style: styleRios, onEachFeature: onEachFeature2
+});
+	
 var riosBufferLayer = L.geoJson(riosBuffer, {
-style: styleRiosBuffer, onEachFeature: onEachFeature2
+style: styleRiosBuffer
+});
+
+var callesLayer = L.geoJson(calles, {
+style: styleCalles, onEachFeature: onEachFeature3
 });
 
 var callesBufferLayer = L.geoJson(callesBuffer, {
-style: styleCallesBuffer, onEachFeature: onEachFeature3
+style: styleCallesBuffer
 });
 
 var restaurantesLayer = L.geoJson(restaurantes, {
@@ -327,9 +355,9 @@ style: styleParquesYPlazas, onEachFeature: onEachFeature13
 var map = L.map("map", {
 center: new L.LatLng(10.06,-83.95),
 zoom: 11,
-layers: [distritosCoronadoLayer, riosBufferLayer, callesBufferLayer, saludLayer, restaurantesLayer, bancosXRestaurantesLayer, iglesiasXDistritoLayer,
-         escuelasYColegiosXDistritoLayer, escuelasXPlazaLayer, telefonosPublicosLayer, paradasXTelefonosLayer, puentesXDistritoLayer, 
-		 poblacionesThiessenXDistritosLayer, comerciosXLocalidadLayer]
+layers: [riosLayer, riosBufferLayer, callesLayer, callesBufferLayer, saludLayer, restaurantesLayer, bancosXRestaurantesLayer, iglesiasXDistritoLayer,
+         escuelasYColegiosXDistritoLayer, parquesYPlazasLayer, escuelasXPlazaLayer, telefonosPublicosLayer, paradasXTelefonosLayer, puentesXDistritoLayer, 
+		 poblacionesThiessenXDistritosLayer, comerciosXLocalidadLayer, distritosCoronadoLayer]
 });
 
 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -342,20 +370,23 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 		
 		
 var overlayMaps = {
-"Distritos Coronado": distritosCoronadoLayer,
-"Ríos": riosBufferLayer,
-"Calles": callesBufferLayer,
-"Salud": saludLayer,
-"Restaurantes": restaurantesLayer,
-"Bancos X Restaurantes": bancosXRestaurantesLayer,
-"Iglesias X Distrito": iglesiasXDistritoLayer,
-"Escuelas y Colegios X Distrito": escuelasYColegiosXDistritoLayer,
-"Escuelas X Plaza": escuelasXPlazaLayer,
-"Telefonos Publicos": telefonosPublicosLayer,
-"Paradas X Telefonos": paradasXTelefonosLayer,
-"Puentes X Distrito": puentesXDistritoLayer,
-"Poblaciones Thiessen X Distritos": poblacionesThiessenXDistritosLayer,
-"Comercios X Localidad": comerciosXLocalidadLayer
+"<img src='https://cdn1.iconfinder.com/data/icons/prettyoffice9/256/pentagon.png' height=13> Distritos Coronado": distritosCoronadoLayer,
+"<img src='https://cdn1.iconfinder.com/data/icons/prettyoffice9/256/pentagon.png' height=13> Poblaciones Thiessen X Distritos": poblacionesThiessenXDistritosLayer,
+"<img src='https://cdn1.iconfinder.com/data/icons/prettyoffice9/256/pentagon.png' height=13> Iglesias X Distrito": iglesiasXDistritoLayer,
+"<img src='https://cdn1.iconfinder.com/data/icons/prettyoffice9/256/pentagon.png' height=13> Escuelas y Colegios X Distrito": escuelasYColegiosXDistritoLayer,
+"<img src='https://cdn1.iconfinder.com/data/icons/prettyoffice9/256/pentagon.png' height=13> Parques y Plazas": parquesYPlazasLayer,
+"<img src='http://www.clker.com/cliparts/0/f/3/2/1194994615287196054line.svg.hi.png' height=13> Ríos": riosLayer,
+"<img src='http://www.clker.com/cliparts/0/f/3/2/1194994615287196054line.svg.hi.png' height=13> Ríos Buffer": riosBufferLayer,
+"<img src='http://www.clker.com/cliparts/0/f/3/2/1194994615287196054line.svg.hi.png' height=13> Calles": callesLayer,
+"<img src='http://www.clker.com/cliparts/0/f/3/2/1194994615287196054line.svg.hi.png' height=13> Calles Buffer": callesBufferLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Salud": saludLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Restaurantes": restaurantesLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Bancos X Restaurantes": bancosXRestaurantesLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Escuelas X Plaza": escuelasXPlazaLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Telefonos Publicos": telefonosPublicosLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Paradas X Telefonos": paradasXTelefonosLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Puentes X Distrito": puentesXDistritoLayer,
+"<img src='https://cdn0.iconfinder.com/data/icons/3D-shapes-psd/128/ball-1x1.png' height=13> Comercios X Localidad": comerciosXLocalidadLayer
 };
 
 L.control.layers(null, overlayMaps).addTo(map);
